@@ -2,7 +2,7 @@ const btnMobile = document.getElementById('btn-mobile'); // cria funçao pra sel
 
 // funçao pra o evento que ativa a const do MENU
 function toggleMenu(){
-    if(Event.type === 'touchstart') Event.preventDefault(); // resolve o double click do 'touchstart'
+    if(event.type === 'touchstart') event.preventDefault(); // resolve o double click do 'touchstart'
     const nav = document.getElementById('nav'); // selecionar o nav do html
     nav.classList.toggle('active');         // adiciona class ao nav   // vs .add .remove    , toggle= adiciona se nao tem, remove se tem
 }   
