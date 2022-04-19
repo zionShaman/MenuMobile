@@ -1,0 +1,87 @@
+body, ul{
+    margin: 0;
+    padding: 0;
+}
+a{
+    color: black;
+    text-decoration: none;  /*SERVE PRA Q ISSO */ 
+    font-family: sans-serif;
+}
+a:hover{
+    background: rgba(0,0,0,.05);  /* 0.05 EH COR OU SOMBRA? */
+}
+#logo{
+    font-size: 1.5rem; /* QUAL UNIDADE EH ESSA ? */
+    font-weight: bold;
+}
+#header{
+    box-sizing:border-box; /* pra evitar somar 70px com 1rem, so why padding 1rem?? */
+    height: 70px;
+    padding: 1rem;
+    display:flex;
+    align-items: center; /* alinha ao centro horizontal e vertical? ou so vertical? */
+    justify-content: space-between;
+    background: #e7e7e7;
+}
+#menu{
+    display:flex;
+    list-style: none;
+    gap: .5rem;  /* dar espaço entre os objetos  VERIFICAR SE EH COMPATIVEL */
+}
+#menu a{
+    display: block;  /* pra poder definir um padding pra eles */ 
+    padding: .5rem;
+}
+
+/* MENU HAMBURGER MOBILE */
+
+#btn-mobile {
+    display:none;
+}
+
+/* Media query, (condiçao) ex: 600, sempre que a tela for width menor que 600px, 
+essas condiçoes de CSS se aplicam over the others */
+@media(max-width: 500px){
+    
+    #menu{
+        /*display: block;  */ /* colocar cada elemento por linha */
+        /* display: none; */ /* nao deixa a animaçao transition acontecer... */
+        display: block;/* back to it, so the animation happens*/
+        position: absolute; /*por cima de qualquer elemento */
+        width: 100%;   /*posiçao absolute precisa declarar tamanho */
+        top: 70px;/* calcular o tamanho do cabeçalho LOGO pra deixar ele logo abaixo do LOGO header */
+        right: 0; /* pra colar no canto direito */
+        background-color: #e7e7e7;
+        /* height: 100vh;  view port, a tela como esta para o usuario, cria espaço a mais, se a posiçao TOp por exemplo, nao for zero. */
+        /*height: calc(100vh - 70px); /* diminui a diferença pra tornar view port screen standart */
+        /* levar o height pra #nav.active, pra possibilitar animaçao de menu abrindo... */
+        height: 0;
+        transition: .6s;  /* #menu li continua visivel só animaçao muda, ADICIONAR VISIBILITY*/
+        visibility: hidden; /* pra esconder elementos ATÉ chegar animaçao AINDA PRECISA ADD OVERFLOW*/
+        overflow-y: hidden;
+        z-index: 1000; /* maior numero possivel, garante a supremacia por cima de outros zindex menores ou standart  */
+    }
+    #nav.active #menu{    /* TOGGLE on JS file... quando nav.active class tiver criada , muda o estilo do id menu */
+        /* display: block;*/  /* nao precisa mais pq declarei em #menu, for transition to happen  */
+        /* display: flex; */ /* muda pra block pra fazer animaçao   none on #menu e block aqui */
+        height: calc(100vh - 70px);  /*from zero(on #menu) to 100vh-70px... colocar transition on #menu */
+        /* transition nao funciona de none(#menu) pra block(#nav.active menu) */
+        visibility: visible; /* #menu */
+        overflow-y: auto; /* caso menu tenha mais itens que a tela suporta, cria barra scroll */
+        /*falta limitar animaçao menu pra fim dos elementos #menu */
+    }
+    #menu a{
+        padding: 1rem 0;
+        margin: 0 1rem; /* REFLETIR DIFERENÇA DE BOTAR 1 REM PADDING OU MARGIN  */
+        border-bottom: 2px solid rgba(0,0,0,.05);        
+    }
+    #btn-mobile{
+        display: flex;  /* Muda do display block, pq vou precisar  */
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    
+}
