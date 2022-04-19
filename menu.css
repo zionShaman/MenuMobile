@@ -76,12 +76,36 @@ essas condiçoes de CSS se aplicam over the others */
         border-bottom: 2px solid rgba(0,0,0,.05);        
     }
     #btn-mobile{
-        display: flex;  /* Muda do display block, pq vou precisar  */
+        display: flex;  /* Muda do display block, pra positionar hamburger to lado  */
         padding: .5rem 1rem;
         font-size: 1rem;
         border: none;
         background: none;
         cursor: pointer;
+        gap: .5rem; /* deixar espaço entre menu e linhas */
     }
-    
+    #hamburger{
+        width: 20px;
+        border-top: 2px solid;
+    }
+    #hamburger::after, #hamburger::before {  /* criar outras linhas sem criar outros <span> in html */
+        content: ''; /* pra poder a linha existir visualmente */
+        display: block; /* pra width e height ser aplicados */
+        width: 20px;
+        height: 2px;   /*similar to border top */ 
+        background: currentColor; /*variavel que pega do #hamburger */
+        margin-top: 5px;
+        transition: .2s;  /* animar a rotation do hamburger.active */
+        position: relative; /*pra ativar o top do hamburger after  */
+    }
+    #nav.active #hamburger{
+        border-top-color: transparent; /* pra mudar as tres barras pra duas */
+    }
+    #nav.active #hamburger::before{
+        transform: rotate(135deg);
+    }
+    #nav.active #hamburger::after{
+        transform: rotate(-135deg);
+        top: -7px;  /* top, so funciona se position: relativo, absoluto ou fixo */
+    }
 }
